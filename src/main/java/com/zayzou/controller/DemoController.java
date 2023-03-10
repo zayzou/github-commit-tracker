@@ -1,5 +1,6 @@
 package com.zayzou.controller;
 
+import com.zayzou.GithubProperties;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,10 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
 
 
+    private final GithubProperties githubProperties;
+
+    public DemoController(GithubProperties githubProperties) {
+        this.githubProperties = githubProperties;
+    }
+
+
     @GetMapping
     public String demo() {
-
-        return "";
+        System.out.println(githubProperties.getToken());
+        return githubProperties.getToken();
 
     }
 }
