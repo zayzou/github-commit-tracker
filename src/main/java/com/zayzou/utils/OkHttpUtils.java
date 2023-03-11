@@ -2,18 +2,24 @@ package com.zayzou.utils;
 
 import com.zayzou.GithubProperties;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.*;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @Component
 public class OkHttpUtils {
 
 
+    private final OkHttpClient client;
     GithubProperties githubProperties;
-    private OkHttpClient client;
 
 
     public OkHttpUtils(GithubProperties githubProperties) {
@@ -22,16 +28,20 @@ public class OkHttpUtils {
     }
 
 
+    private String currentDateAndTime() {
+        LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.of(00, 00, 00));
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        return now.format(formatter);
+    }
+
     public String get() {
         try {
-            MediaType mediaType = MediaType.parse("text/plain");
-            RequestBody body = RequestBody.create(mediaType, "");
-            String currentDate = "2023-03-11T10:30:00Z";
-            String token = this.githubProperties.getToken();
+            String currentDate = currentDateAndTime();
+            String token = "Bearer " + this.githubProperties.getToken();
             Request request = new Request.Builder()
                     .url("https://api.github.com/user/repos?sort=updated&since=" + currentDate)
                     .addHeader("Accept", "application/vnd.github+json")
-                    .addHeader("Authorization", "Bearer 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")
+                    .addHeader("Authorization", token)
                     .addHeader("X-GitHub-Api-Version", "2022-11-28")
                     .build();
             Response response = this.client.newCall(request).execute();
