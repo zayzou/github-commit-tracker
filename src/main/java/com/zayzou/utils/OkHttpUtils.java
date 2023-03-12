@@ -29,7 +29,7 @@ public class OkHttpUtils {
 
 
     private String currentDateAndTime() {
-        LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.of(00, 00, 00));
+        LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.of(8, 00, 00));
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         return now.format(formatter);
     }
@@ -38,8 +38,9 @@ public class OkHttpUtils {
         try {
             String currentDate = currentDateAndTime();
             String token = "Bearer " + this.githubProperties.getToken();
+            String url = "https://api.github.com/user/repos?sort=updated&since=" + currentDate;
             Request request = new Request.Builder()
-                    .url("https://api.github.com/user/repos?sort=updated&since=" + currentDate)
+                    .url(url)
                     .addHeader("Accept", "application/vnd.github+json")
                     .addHeader("Authorization", token)
                     .addHeader("X-GitHub-Api-Version", "2022-11-28")
