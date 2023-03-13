@@ -64,13 +64,12 @@ public class OkHttpUtils {
     public String get() {
         try {
             String currentDate = currentDate();
-            String token = "Bearer " + this.githubProperties.getToken();
-            String username = this.githubProperties.getUsername();
-            String url = "https://github.com/users/" + username + "/contributions?to=" + currentDate;
+            String url = String.format("https://github.com/users/%s/contributions?to=%s",
+                    this.githubProperties.getUsername(), currentDate);
             Request request = new Request.Builder()
                     .url(url)
                     .addHeader("Accept", ACCECPT_HEADER)
-                    .addHeader("Authorization", token)
+                    .addHeader("Authorization", "Bearer " + this.githubProperties.getToken())
                     .addHeader("X-GitHub-Api-Version", API_VERSION_HEADER)
                     .build();
             Response response = this.client.newCall(request).execute();
