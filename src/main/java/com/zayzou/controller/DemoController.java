@@ -1,6 +1,7 @@
 package com.zayzou.controller;
 
 import com.zayzou.GithubProperties;
+import com.zayzou.service.EmailService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,16 +12,18 @@ public class DemoController {
 
 
     private final GithubProperties githubProperties;
+    private final EmailService emailService;
 
-    public DemoController(GithubProperties githubProperties) {
+    public DemoController(GithubProperties githubProperties, EmailService emailService) {
         this.githubProperties = githubProperties;
+        this.emailService = emailService;
     }
 
 
     @GetMapping
     public String demo() {
-        System.out.println(githubProperties.getToken());
-        return githubProperties.getToken();
+        emailService.send();
+        return "done";
 
     }
 }
