@@ -10,4 +10,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class GithubProperties {
 
     private String token;
+    private String username;
 }

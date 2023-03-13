@@ -54,7 +54,8 @@ public class OkHttpUtils {
         try {
             String currentDate = currentDate();
             String token = "Bearer " + this.githubProperties.getToken();
-            String url = "https://github.com/users/Soffi-Zahir/contributions?to=" + currentDate;
+            String username = this.githubProperties.getUsername();
+            String url = "https://github.com/users/" + username + "/contributions?to=" + currentDate;
             Request request = new Request.Builder()
                     .url(url)
                     .addHeader("Accept", "application/vnd.github+json")
