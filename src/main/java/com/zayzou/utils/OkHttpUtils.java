@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -17,6 +19,8 @@ import java.util.regex.Pattern;
 @Component
 public class OkHttpUtils {
 
+    public static final String API_VERSION_HEADER = "2022-11-28";
+    public static final String ACCECPT_HEADER = "application/vnd.github+json";
     private final OkHttpClient client;
     GithubProperties githubProperties;
 
@@ -29,7 +33,7 @@ public class OkHttpUtils {
         return string.replaceAll(regex, "");
     }
 
-    private String getValue(String input) {
+    private String getContributionForDate(String input) {
         input = getString(input, "\\s");
         String regex = ">\\d+";
         Pattern pattern = Pattern.compile(regex);
@@ -42,6 +46,13 @@ public class OkHttpUtils {
         }
 
 
+    }
+
+
+    private String getContributionForDate(String string, String date) {
+        Document doc = Jsoup.parse(string);
+        String value = doc.getElementsByAttributeValue("data-date", date).first().ownText();
+        return value;
     }
 
     private String currentDate() {
@@ -58,13 +69,14 @@ public class OkHttpUtils {
             String url = "https://github.com/users/" + username + "/contributions?to=" + currentDate;
             Request request = new Request.Builder()
                     .url(url)
-                    .addHeader("Accept", "application/vnd.github+json")
+                    .addHeader("Accept", ACCECPT_HEADER)
                     .addHeader("Authorization", token)
-                    .addHeader("X-GitHub-Api-Version", "2022-11-28")
+                    .addHeader("X-GitHub-Api-Version", API_VERSION_HEADER)
                     .build();
             Response response = this.client.newCall(request).execute();
             String responseValue = response.body().string();
-            return getValue(responseValue);
+            return getContributionForDate(responseValue, currentDate);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
