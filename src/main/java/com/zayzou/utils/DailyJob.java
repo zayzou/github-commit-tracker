@@ -1,6 +1,5 @@
 package com.zayzou.utils;
 
-import com.zayzou.service.GithubService;
 import com.zayzou.service.TelegramService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -24,7 +23,7 @@ public class DailyJob {
 
     }
 
-    @Scheduled(cron = "0 * * * * *", zone = "UTC")
+    @Scheduled(cron = "0 */5 * * * *", zone = "UTC") //to run every day at 8pm we will use "0 0 20 * * ?"
     public void run() {
         log.info("The time is {}", dateFormat.format(new Date()));
         telegramService.send();
