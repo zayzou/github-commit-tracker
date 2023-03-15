@@ -16,17 +16,17 @@ public class DailyJob {
 
     final
     TelegramService telegramService;
-    GithubService githubService;
+
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    public DailyJob(TelegramService telegramService, GithubService githubService) {
+    public DailyJob(TelegramService telegramService) {
         this.telegramService = telegramService;
-        this.githubService = githubService;
+
     }
 
     @Scheduled(cron = "0 * * * * *", zone = "UTC")
     public void run() {
         log.info("The time is {}", dateFormat.format(new Date()));
-        telegramService.send(this.githubService.getUpdates());
+        telegramService.send();
     }
 }

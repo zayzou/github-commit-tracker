@@ -24,7 +24,7 @@ public class DemoController {
 
     @GetMapping(params = "telegram")
     public String telegram() {
-        telegramService.send("message");
+        telegramService.send();
         return "telegram message sent";
     }
 

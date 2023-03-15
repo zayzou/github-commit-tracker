@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 public class TelegramService {
 
     private final OkHttpUtils okHttpUtils;
+    private GithubService githubService;
 
-    public TelegramService(OkHttpUtils okHttpUtils) {
+    public TelegramService(OkHttpUtils okHttpUtils, GithubService githubService) {
         this.okHttpUtils = okHttpUtils;
+        this.githubService = githubService;
     }
 
-    public void send(String message) {
+    public void send() {
         String user_id = "5183089051";
+        String message = githubService.getUpdates();
         this.okHttpUtils.httpCall(
                 "https://api.telegram.org/bot6089177075:AAEPBF7F4RqJOe_crCXccIvENc9JuYxBOBU/sendMessage?chat_id=" + user_id + "&text=" + message,
                 "POST");
