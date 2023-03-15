@@ -1,6 +1,5 @@
 package com.zayzou.configuration;
 
-import com.zayzou.GithubProperties;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

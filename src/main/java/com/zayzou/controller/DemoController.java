@@ -1,6 +1,6 @@
 package com.zayzou.controller;
 
-import com.zayzou.GithubProperties;
+import com.zayzou.configuration.GithubProperties;
 import com.zayzou.service.EmailService;
 import com.zayzou.service.TelegramService;
 import org.springframework.web.bind.annotation.GetMapping;

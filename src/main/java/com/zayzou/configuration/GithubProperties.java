@@ -1,4 +1,4 @@
-package com.zayzou;
+package com.zayzou.configuration;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
