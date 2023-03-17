@@ -1,18 +1,25 @@
 package com.zayzou.configuration;
 
+import com.zayzou.controller.TelegramBot;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 import java.util.Properties;
 
 @Configuration
-@EnableConfigurationProperties(GithubProperties.class)
+@EnableConfigurationProperties({GithubProperties.class, TelegramProperties.class})
 public class AppConfig {
 
+    @Autowired
+    TelegramBot telegramBot;
     @Value("${spring.mail.password}")
     private String password;
     @Value("${spring.mail.username}")
@@ -21,6 +28,7 @@ public class AppConfig {
     private String host;
     @Value("${spring.mail.port}")
     private String port;
+
 
     public AppConfig() {
     }
@@ -42,5 +50,15 @@ public class AppConfig {
 
         return mailSender;
 
+    }
+
+    @Bean
+    public void registerBot() {
+        try {
+            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+            botsApi.registerBot(telegramBot);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 }
