@@ -1,6 +1,6 @@
 package com.zayzou;
 
-import com.zayzou.controller.BotController;
+import com.zayzou.controller.TelegramBot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -14,12 +14,6 @@ public class GithubCommitTrackerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(GithubCommitTrackerApplication.class, args);
-        try {
-            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-            botsApi.registerBot(new BotController());
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
     }
 
 }

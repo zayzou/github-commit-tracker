@@ -1,13 +1,22 @@
 package com.zayzou.controller;
 
+import com.zayzou.service.TelegramService;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 
-public class BotController extends TelegramLongPollingBot {
+@Component
+public class TelegramBot extends TelegramLongPollingBot {
 
+
+    TelegramService telegramService;
+
+    public TelegramBot(TelegramService telegramService) {
+        this.telegramService = telegramService;
+    }
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -16,9 +25,10 @@ public class BotController extends TelegramLongPollingBot {
             String message = update.getMessage().getText();
             String value = switch (message) {
                 case "/about" -> "this is a bot that send my daily github contribution";
-                case "/total" -> "The total commits is ";
-                case "/run" -> "running the process";
-                default -> message;
+                case "/total" -> "The total commits is 👀 ";
+                case "/run" -> getSend();
+                case "/test" -> "running the process 🍏";
+                default -> "";
             };
             SendMessage sendMessage = new SendMessage(); // Create a SendMessage object with mandatory fields
             sendMessage.setChatId(update.getMessage().getChatId().toString());
@@ -27,10 +37,16 @@ public class BotController extends TelegramLongPollingBot {
             try {
                 execute(sendMessage); // Call method to send the sendMessage
             } catch (TelegramApiException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             }
         }
     }
+
+    private String getSend() {
+        telegramService.send();
+        return "";
+    }
+
 
     @Override
     public String getBotUsername() {
