@@ -1,6 +1,7 @@
 package com.zayzou.controller;
 
 import com.zayzou.service.TelegramService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -12,9 +13,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
 
-
     TelegramService telegramService;
-
 
     @Value("${telegram.bot.username}")
     private String username;
@@ -27,13 +26,23 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     }
 
+    @NotNull
+    private static String getAbout() {
+        return """
+                👋 Hello, I am the 🤖 SpringyContributionBot 🌱, your friendly assistant for GitHub contributions! 🎉\s
+                Use /run to get the number of contributions you made today! 📈\s
+                Use /all to get the total number of contributions you made this year! 📊\s
+                Keep calm and code on! 💻🚀
+                """;
+    }
+
     @Override
     public void onUpdateReceived(Update update) {
         // We check if the update has a message and the message has text
         if (update.hasMessage() && update.getMessage().hasText()) {
             String message = update.getMessage().getText();
             String value = switch (message) {
-                case "/about" -> "About bot";
+                case "/about" -> getAbout();
                 case "/all" -> "Total";
                 case "/run" -> getSend();
                 case "/test" -> "Testing the bot";
@@ -54,7 +63,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     private String getSend() {
 
         telegramService.send();
-        return "🍃";
+        return " ";
     }
 
 
