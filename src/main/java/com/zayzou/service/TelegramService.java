@@ -16,7 +16,7 @@ public class TelegramService {
 
     public void send() {
         String user_id = "5183089051";
-        String message = githubService.getUpdates();
+        String message = githubService.getTodayContribution();
         String reaction = message.startsWith("No") ? "🙁" : "😍";
         message = String.format("%s %s", reaction, message);
         this.okHttpUtils.httpCall(

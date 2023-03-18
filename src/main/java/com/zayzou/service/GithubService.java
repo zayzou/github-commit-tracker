@@ -36,14 +36,14 @@ public class GithubService {
         return doc.getElementsByAttributeValue(attribute, value).first().ownText();
     }
 
-    public String getUpdates() {
+    public String getTodayContribution() {
         String currentDate = getCurrentDate();
         String url = String.format(GITHUB_CONTRIBUTIONS_URL_FORMAT, githubUsername, currentDate);
         String responseValue = okHttpUtils.httpCall(url, "GET");
         return getContribution(responseValue, "data-date", currentDate);
     }
 
-    public String getAllContribution() {
+    public String getCurrentYearContribution() {
         String currentDate = getCurrentDate();
         String url = String.format(GITHUB_CONTRIBUTIONS_URL_FORMAT, githubUsername, currentDate);
         String responseValue = okHttpUtils.httpCall(url, "GET");
