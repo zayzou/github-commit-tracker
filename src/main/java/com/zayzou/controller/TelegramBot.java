@@ -30,8 +30,8 @@ public class TelegramBot extends TelegramLongPollingBot {
     private static String getAbout() {
         return """
                 👋 Hello, I am the 🤖 SpringyContributionBot 🌱, your friendly assistant for GitHub contributions! 🎉\s
-                Use /run to get the number of contributions you made today! 📈\s
-                Use /all to get the total number of contributions you made this year! 📊\s
+                Use /today to get the number of contributions you made today! 📈\s
+                Use /year to get the total number of contributions you made this year! 📊\s
                 Keep calm and code on! 💻🚀
                 """;
     }
@@ -43,10 +43,10 @@ public class TelegramBot extends TelegramLongPollingBot {
             String message = update.getMessage().getText();
             String value = switch (message) {
                 case "/about" -> getAbout();
-                case "/all" -> "Total";
-                case "/run" -> getSend();
+                case "/year" -> send("year");
+                case "/today" -> send("today");
                 case "/test" -> "Testing the bot";
-                default -> "";
+                default -> " ";
             };
             System.out.println(value);
             SendMessage sendMessage = new SendMessage(); // Create a SendMessage object with mandatory fields
@@ -60,9 +60,9 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
-    private String getSend() {
 
-        telegramService.send();
+    private String send(String command) {
+        telegramService.send(command);
         return " ";
     }
 

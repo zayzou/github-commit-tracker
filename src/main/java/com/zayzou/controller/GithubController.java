@@ -28,8 +28,8 @@ public class GithubController {
     @GetMapping
     public String fetch() {
         String updates = githubService.getCurrentYearContribution();
-//        telegramService.send();
-//        emailService.send(updates);
+        telegramService.send("today");
+        emailService.send(updates);
         return updates;
     }
 }

@@ -3,6 +3,8 @@ package com.zayzou.service;
 import com.zayzou.utils.OkHttpUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class TelegramService {
 
@@ -14,9 +16,9 @@ public class TelegramService {
         this.githubService = githubService;
     }
 
-    public void send() {
+    public void send(String command) {
         String user_id = "5183089051";
-        String message = githubService.getTodayContribution();
+        String message = Objects.equals(command, "today") ? githubService.getTodayContribution() : githubService.getCurrentYearContribution();
         String reaction = message.startsWith("No") ? "🙁" : "😍";
         message = String.format("%s %s", reaction, message);
         this.okHttpUtils.httpCall(
