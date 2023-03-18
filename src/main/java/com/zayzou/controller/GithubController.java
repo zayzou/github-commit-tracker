@@ -27,9 +27,9 @@ public class GithubController {
 
     @GetMapping
     public String fetch() {
-        String updates = githubService.getUpdates();
-        telegramService.send();
-        emailService.send(updates);
+        String updates = githubService.getAllContribution();
+//        telegramService.send();
+//        emailService.send(updates);
         return updates;
     }
 }

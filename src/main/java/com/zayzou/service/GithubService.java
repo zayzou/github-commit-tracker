@@ -13,16 +13,24 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class GithubService {
 
+    private final String githubUsername;
     OkHttpUtils okHttpUtils;
 
     public GithubService(OkHttpUtils okHttpUtils) {
         this.okHttpUtils = okHttpUtils;
+        githubUsername = "Soffi-Zahir";
     }
 
 
     private String getContributionForDate(String string, String date) {
         Document doc = Jsoup.parse(string);
         return doc.getElementsByAttributeValue("data-date", date).first().ownText();
+    }
+
+    private String getContributionForYear(String string) {
+        Document doc = Jsoup.parse(string);
+        return doc.getElementsByTag("h2").first().ownText();
+
     }
 
     private String currentDate() {
@@ -32,9 +40,22 @@ public class GithubService {
     }
 
     public String getUpdates() {
+        String currentDate = currentDate();
         var responseValue = this.okHttpUtils.httpCall(
-                "https://github.com/users/Soffi-Zahir/contributions?to=2023-01-01",
+                "https://github.com/users/" + githubUsername + "/contributions?to=" + currentDate,
                 "GET");
-        return getContributionForDate(responseValue, currentDate());
+        log.info(responseValue);
+        return getContributionForDate(responseValue, currentDate);
     }
+
+    public String getAllContribution() {
+        String currentDate = currentDate();
+        var responseValue = this.okHttpUtils.httpCall(
+                "https://github.com/users/" + githubUsername + "/contributions?to=" + currentDate,
+                "GET");
+        log.info(responseValue);
+        return getContributionForYear(responseValue);
+    }
+
+
 }
