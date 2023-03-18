@@ -13,49 +13,40 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class GithubService {
 
+    private final String GITHUB_CONTRIBUTIONS_URL_FORMAT = "https://github.com/users/%s/contributions?to=%s";
     private final String githubUsername;
-    OkHttpUtils okHttpUtils;
+    private final OkHttpUtils okHttpUtils;
 
     public GithubService(OkHttpUtils okHttpUtils) {
         this.okHttpUtils = okHttpUtils;
-        githubUsername = "Soffi-Zahir";
+        this.githubUsername = "Soffi-Zahir";
     }
 
-
-    private String getContributionForDate(String string, String date) {
-        Document doc = Jsoup.parse(string);
-        return doc.getElementsByAttributeValue("data-date", date).first().ownText();
+    private Document parseHtml(String html) {
+        return Jsoup.parse(html);
     }
 
-    private String getContributionForYear(String string) {
-        Document doc = Jsoup.parse(string);
-        return doc.getElementsByTag("h2").first().ownText();
-
-    }
-
-    private String currentDate() {
-        LocalDate now = LocalDate.now();
+    private String getCurrentDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
-        return now.format(formatter);
+        return LocalDate.now().format(formatter);
+    }
+
+    private String getContribution(String html, String attribute, String value) {
+        Document doc = parseHtml(html);
+        return doc.getElementsByAttributeValue(attribute, value).first().ownText();
     }
 
     public String getUpdates() {
-        String currentDate = currentDate();
-        var responseValue = this.okHttpUtils.httpCall(
-                "https://github.com/users/" + githubUsername + "/contributions?to=" + currentDate,
-                "GET");
-        log.info(responseValue);
-        return getContributionForDate(responseValue, currentDate);
+        String currentDate = getCurrentDate();
+        String url = String.format(GITHUB_CONTRIBUTIONS_URL_FORMAT, githubUsername, currentDate);
+        String responseValue = okHttpUtils.httpCall(url, "GET");
+        return getContribution(responseValue, "data-date", currentDate);
     }
 
     public String getAllContribution() {
-        String currentDate = currentDate();
-        var responseValue = this.okHttpUtils.httpCall(
-                "https://github.com/users/" + githubUsername + "/contributions?to=" + currentDate,
-                "GET");
-        log.info(responseValue);
-        return getContributionForYear(responseValue);
+        String currentDate = getCurrentDate();
+        String url = String.format(GITHUB_CONTRIBUTIONS_URL_FORMAT, githubUsername, currentDate);
+        String responseValue = okHttpUtils.httpCall(url, "GET");
+        return getContribution(responseValue, "class", "f4 text-normal mb-2");
     }
-
-
 }
