@@ -15,7 +15,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import java.util.Properties;
 
 @Configuration
-@EnableConfigurationProperties({GithubProperties.class, TelegramProperties.class})
+@EnableConfigurationProperties({GithubProperties.class, TelegramProperties.class, NotionConfigProperties.class})
 public class AppConfig {
 
     @Autowired
