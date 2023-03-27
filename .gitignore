@@ -34,3 +34,4 @@ build/
 src/main/java/com/zayzou/controller/DemoController.java
 
 src/main/resources/secrets.properties
+./Stuff.txt
