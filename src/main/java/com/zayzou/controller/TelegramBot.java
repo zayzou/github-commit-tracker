@@ -48,7 +48,6 @@ public class TelegramBot extends TelegramLongPollingBot {
                 case "/test" -> "Testing the bot";
                 default -> " ";
             };
-            System.out.println(value);
             SendMessage sendMessage = new SendMessage(); // Create a SendMessage object with mandatory fields
             sendMessage.setChatId(update.getMessage().getChatId().toString());
             sendMessage.setText(value);
