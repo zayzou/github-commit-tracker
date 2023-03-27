@@ -30,15 +30,12 @@ public class AppConfig {
     private String port;
 
 
-    public AppConfig() {
-    }
-
     @Bean
     public JavaMailSender getJavaMailSender() {
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(host);
-        mailSender.setPort(Integer.valueOf(port));
+        mailSender.setPort(Integer.parseInt(port));
         mailSender.setPassword(password);
         mailSender.setUsername(username);
 
