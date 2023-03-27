@@ -1,6 +1,5 @@
 package com.zayzou.controller;
 
-import com.zayzou.service.EmailService;
 import com.zayzou.service.GithubService;
 import com.zayzou.service.TelegramService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,19 +16,16 @@ public class GithubController {
 
     GithubService githubService;
     TelegramService telegramService;
-    EmailService emailService;
 
-    public GithubController(GithubService githubService, TelegramService telegramService, EmailService emailService) {
+    public GithubController(GithubService githubService, TelegramService telegramService) {
         this.githubService = githubService;
         this.telegramService = telegramService;
-        this.emailService = emailService;
     }
 
     @GetMapping
     public String fetch() {
         String updates = githubService.getCurrentYearContribution();
         telegramService.send("today");
-        emailService.send(updates);
         return updates;
     }
 }
