@@ -4,6 +4,7 @@ import com.zayzou.utils.OkHttpUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,12 +15,13 @@ import java.time.format.DateTimeFormatter;
 public class GithubService {
 
     private final String GITHUB_CONTRIBUTIONS_URL_FORMAT = "https://github.com/users/%s/contributions?to=%s";
-    private final String githubUsername;
+
+    @Value(("${github.username}"))
+    private String githubUsername;
     private final OkHttpUtils okHttpUtils;
 
     public GithubService(OkHttpUtils okHttpUtils) {
         this.okHttpUtils = okHttpUtils;
-        this.githubUsername = "Soffi-Zahir";
     }
 
     private Document parseHtml(String html) {
