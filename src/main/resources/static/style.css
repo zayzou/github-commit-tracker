@@ -1,0 +1,52 @@
+/*
+ * Copyright (C) 2023
+ *
+ * Author : z.soffi
+ * File : style.css
+ */
+/* Set the font family and background color */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F0F0F0;
+}
+
+/* Set the header style */
+header {
+    background-color: #6DB33F;
+    padding: 30px;
+    text-align: center;
+    color: white;
+    font-size: 40px;
+}
+
+/* Set the footer style */
+footer {
+    background-color: #6DB33F;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+/* Set the main content style */
+main {
+    margin: 50px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Set the button style */
+a.button {
+    background-color: #6DB33F;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
