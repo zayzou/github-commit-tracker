@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2023
+ *
+ * Author : z.soffi
+ * File : EmailService.java
+ */
+
 package com.zayzou.service;
 
 import jakarta.mail.MessagingException;
