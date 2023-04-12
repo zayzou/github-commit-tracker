@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2023
+ *
+ * Author : z.soffi
+ * File : NotionController.java
+ */
+
 package com.zayzou.controller;
 
 import com.zayzou.configuration.NotionConfigProperties;
@@ -5,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.Map;
 
 @Slf4j

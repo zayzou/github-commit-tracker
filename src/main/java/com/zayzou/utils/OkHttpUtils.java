@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2023
+ *
+ * Author : z.soffi
+ * File : OkHttpUtils.java
+ */
+
 package com.zayzou.utils;
 
 import lombok.extern.slf4j.Slf4j;

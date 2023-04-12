@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2023
+ *
+ * Author : z.soffi
+ * File : TelegramProperties.java
+ */
+
 package com.zayzou.configuration;
 
 import lombok.AllArgsConstructor;

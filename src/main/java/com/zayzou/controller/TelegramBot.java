@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2023
+ *
+ * Author : z.soffi
+ * File : TelegramBot.java
+ */
+
 package com.zayzou.controller;
 
 import com.zayzou.service.TelegramService;

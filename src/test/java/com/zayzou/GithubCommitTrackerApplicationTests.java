@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2023
+ *
+ * Author : z.soffi
+ * File : GithubCommitTrackerApplicationTests.java
+ */
+
 package com.zayzou;
 
 import org.junit.jupiter.api.Test;
