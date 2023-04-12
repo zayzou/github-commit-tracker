@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2023
+ *
+ * Author : z.soffi
+ * File : AppConfig.java
+ */
+
 package com.zayzou.configuration;
 
 import com.zayzou.controller.TelegramBot;
