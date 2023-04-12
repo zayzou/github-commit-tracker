@@ -1,3 +1,10 @@
+/*
+ * Copyright (C) 2023
+ *
+ * Author : z.soffi
+ * File : DailyJob.java
+ */
+
 package com.zayzou.utils;
 
 import com.zayzou.service.TelegramService;
