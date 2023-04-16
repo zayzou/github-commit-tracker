@@ -1,6 +1,6 @@
 # GitHub Commit Tracker
 
-![Spring Logo](https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg)
+![Spring Logo](https://spring.io/img/spring-2.svg)
 
 ## Introduction
 
