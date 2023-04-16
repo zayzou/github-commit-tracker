@@ -36,9 +36,6 @@ To run the application, clone the repository and run the following command:
 
 The application will run and fetch the number of commits made by the user at 20:00 UTC every day. It will then send an email and message containing the count.
 
-## Acknowledgments
-
-This application was inspired by the GitHub Commit Tracker project by Soffi Zahir (https://github.com/Soffi-Zahir/github-commit-tracker).
 
 ## License
 
