@@ -23,9 +23,6 @@ To use this application, you will need to provide the following configuration pr
 
 - `github.username`: The GitHub username of the user to track commits for.
 - `github.token`: The GitHub API token to authenticate with.
-- `email.from`: The email address to send the email from.
-- `email.to`: The email address to send the email to.
-- `email.password`: The email account password.
 - `telegram.bot.token`: The Telegram bot API token.
 - `telegram.chat.id`: The Telegram chat ID to send the message to.
 
