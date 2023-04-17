@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequestMapping(value = "github", produces = "application/json")
-@CrossOrigin(origins = "http://localhost:8080")
+// @CrossOrigin(origins = "http://localhost:8080")
 public class GithubController {
 
     GithubService githubService;
