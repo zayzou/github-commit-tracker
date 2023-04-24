@@ -31,6 +31,16 @@ public class TelegramBot extends TelegramLongPollingBot {
         this.telegramService = telegramService;
     }
 
+    @NotNull
+    private static String getAbout() {
+        return """
+                👋 Hello, I am the 🤖 SpringyContributionBot 🌱, your friendly assistant for GitHub contributions! 🎉\s
+                Use /today to get the number of contributions you made today! 📈\s
+                Use /year to get the total number of contributions you made this year! 📊\s
+                Keep calm and code on! 💻🚀
+                """;
+    }
+
     @Override
     public void onUpdateReceived(Update update) {
         // We check if the update has a message and the message has text
@@ -53,21 +63,10 @@ public class TelegramBot extends TelegramLongPollingBot {
             }
         }
     }
-    
-       @NotNull
-    private static String getAbout() {
-        return """
-                👋 Hello, I am the 🤖 SpringyContributionBot 🌱, your friendly assistant for GitHub contributions! 🎉\s
-                Use /today to get the number of contributions you made today! 📈\s
-                Use /year to get the total number of contributions you made this year! 📊\s
-                Keep calm and code on! 💻🚀
-                """;
-    }
 
     // Helper method to send commands to TelegramService
     private String send(String command) {
-        telegramService.send(command);
-        return " ";
+        return telegramService.sendAndReturn(command);
     }
 
     @Override
