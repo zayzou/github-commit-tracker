@@ -34,6 +34,7 @@ public class OkHttpUtils {
             return response.body().string();
 
         } catch (IOException e) {
+             log.error(e.getMessage());
             throw new RuntimeException(e);
         }
     }

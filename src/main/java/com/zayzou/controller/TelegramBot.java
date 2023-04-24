@@ -16,7 +16,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
 
@@ -30,17 +29,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     public TelegramBot(TelegramService telegramService) {
         this.telegramService = telegramService;
-
-    }
-
-    @NotNull
-    private static String getAbout() {
-        return """
-                👋 Hello, I am the 🤖 SpringyContributionBot 🌱, your friendly assistant for GitHub contributions! 🎉\s
-                Use /today to get the number of contributions you made today! 📈\s
-                Use /year to get the total number of contributions you made this year! 📊\s
-                Keep calm and code on! 💻🚀
-                """;
     }
 
     @Override
@@ -49,11 +37,11 @@ public class TelegramBot extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
             String message = update.getMessage().getText();
             String value = switch (message) {
-                case "/about" -> getAbout();
-                case "/year" -> send("year");
-                case "/today" -> send("today");
-                case "/test" -> "Testing the bot";
-                default -> " ";
+                case "/about" -> getAbout(); // If message is "/about", call getAbout() method
+                case "/year" -> send("year"); // If message is "/year", call send() method with "year" command
+                case "/today" -> send("today"); // If message is "/today", call send() method with "today" command
+                case "/test" -> "Testing the bot"; // If message is "/test", return "Testing the bot"
+                default -> " "; // For any other message, return empty string
             };
             SendMessage sendMessage = new SendMessage(); // Create a SendMessage object with mandatory fields
             sendMessage.setChatId(update.getMessage().getChatId().toString());
@@ -65,23 +53,30 @@ public class TelegramBot extends TelegramLongPollingBot {
             }
         }
     }
+    
+       @NotNull
+    private static String getAbout() {
+        return """
+                👋 Hello, I am the 🤖 SpringyContributionBot 🌱, your friendly assistant for GitHub contributions! 🎉\s
+                Use /today to get the number of contributions you made today! 📈\s
+                Use /year to get the total number of contributions you made this year! 📊\s
+                Keep calm and code on! 💻🚀
+                """;
+    }
 
-
+    // Helper method to send commands to TelegramService
     private String send(String command) {
         telegramService.send(command);
         return " ";
     }
 
-
     @Override
     public String getBotUsername() {
-        return this.username;
+        return this.username; // Return the bot's username
     }
 
     @Override
     public String getBotToken() {
-        return this.token;
+        return this.token; // Return the bot's token
     }
-
-
 }

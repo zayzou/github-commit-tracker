@@ -1,6 +1,7 @@
 # GitHub Commit Tracker
 
-![Spring Logo](https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg)
+
+![Spring Logo](https://spring.io/img/spring-2.svg)
 
 ## Introduction
 
@@ -22,9 +23,6 @@ To use this application, you will need to provide the following configuration pr
 
 - `github.username`: The GitHub username of the user to track commits for.
 - `github.token`: The GitHub API token to authenticate with.
-- `email.from`: The email address to send the email from.
-- `email.to`: The email address to send the email to.
-- `email.password`: The email account password.
 - `telegram.bot.token`: The Telegram bot API token.
 - `telegram.chat.id`: The Telegram chat ID to send the message to.
 
@@ -35,9 +33,6 @@ To run the application, clone the repository and run the following command:
 
 The application will run and fetch the number of commits made by the user at 20:00 UTC every day. It will then send an email and message containing the count.
 
-## Acknowledgments
-
-This application was inspired by the GitHub Commit Tracker project by Soffi Zahir (https://github.com/Soffi-Zahir/github-commit-tracker).
 
 ## License
 

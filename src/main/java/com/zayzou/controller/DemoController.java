@@ -3,6 +3,7 @@
  *
  * Author : z.soffi
  * File : DemoController.java
+ * This class is just for tests purpose
  */
 
 package com.zayzou.controller;
