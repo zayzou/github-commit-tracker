@@ -31,9 +31,8 @@ public class TelegramService {
 
     public void sendToTelegram(String command) {
         String message = getResult(command);
-        this.okHttpUtils.httpCall(
-                "https://api.telegram.org/bot" + botId + "/sendMessage?chat_id=" + userId + "&text=" + message, // Construct Telegram API URL with bot ID, user ID, and message
-                "POST"); // Make HTTP POST call to send the message to Telegram
+        String url = "https://api.telegram.org/bot" + botId + "/sendMessage?chat_id=" + userId + "&text=" + message;
+        this.okHttpUtils.httpCall(url, "POST");
     }
 
 
