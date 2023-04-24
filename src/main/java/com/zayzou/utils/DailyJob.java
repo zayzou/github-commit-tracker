@@ -33,6 +33,6 @@ public class DailyJob {
     @Scheduled(cron = "0 0 20 * * ?", zone = "GMT+1") //to run every day at 8pm we will use "0 0 20 * * ?"
     public void run() {
         log.info("The time is {}", dateFormat.format(new Date()));
-        telegramService.send("today");
+        telegramService.sendToTelegram("today");
     }
 }

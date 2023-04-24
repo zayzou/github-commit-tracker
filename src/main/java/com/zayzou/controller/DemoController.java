@@ -32,7 +32,7 @@ public class DemoController {
 
     @GetMapping(params = "telegram")
     public String telegram() {
-        telegramService.send("today");
+        telegramService.sendToTelegram("today");
         return "telegram message sent";
     }
 

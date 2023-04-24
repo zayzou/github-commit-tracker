@@ -29,18 +29,15 @@ public class TelegramService {
         this.githubService = githubService;
     }
 
-    public void send(String command) {
-        String message = getMessage(command);
+    public void sendToTelegram(String command) {
+        String message = getResult(command);
         this.okHttpUtils.httpCall(
                 "https://api.telegram.org/bot" + botId + "/sendMessage?chat_id=" + userId + "&text=" + message, // Construct Telegram API URL with bot ID, user ID, and message
                 "POST"); // Make HTTP POST call to send the message to Telegram
     }
 
-    public String sendAndReturn(String command) {
-        return getMessage(command);
-    }
 
-    private String getMessage(String command) {
+    public String getResult(String command) {
         String message = Objects.equals(command, "today") ? githubService.getTodayContribution() : githubService.getCurrentYearContribution(); // Fetch Github contributions based on command ("today" or "year")
         String reaction = message.startsWith("No") ? "😭" : "🥳"; // Set reaction emoji based on Github contributions message
         message = String.format("%s %s", reaction, message); // Format the final message with reaction emoji
