@@ -7,9 +7,7 @@
  */
 
 package com.zayzou.controller;
-
 import com.zayzou.configuration.GithubProperties;
-import com.zayzou.service.EmailService;
 import com.zayzou.service.TelegramService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +19,11 @@ public class DemoController {
 
 
     private final GithubProperties githubProperties;
-    private final EmailService emailService;
+
     private final TelegramService telegramService;
 
-    public DemoController(GithubProperties githubProperties, EmailService emailService, TelegramService telegramService) {
+    public DemoController(GithubProperties githubProperties, TelegramService telegramService) {
         this.githubProperties = githubProperties;
-        this.emailService = emailService;
         this.telegramService = telegramService;
     }
 
@@ -36,12 +33,6 @@ public class DemoController {
         return "telegram message sent";
     }
 
-    @GetMapping(params = "email")
-    public String email() {
-        emailService.send("text");
-        return "done";
-
-    }
 
 
 }
