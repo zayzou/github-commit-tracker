@@ -1,15 +1,14 @@
-version: '3'
+version: '3.1'
 
 services:
-  db:
+
+  mysql:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: pa$$w0rd
-      MYSQL_DATABASE: github
-      MYSQL_USER: github
-      MYSQL_PASSWORD: pa$$w0rd
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: github_app
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
     ports:
-      - "3306:3306"
-    volumes:
-      - ./data:/var/lib/mysql
+      - 3306:3306
