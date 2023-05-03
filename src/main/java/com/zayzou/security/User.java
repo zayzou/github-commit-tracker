@@ -29,7 +29,7 @@ public class User implements UserDetails {
 
     @GeneratedValue
     @Id
-    private Long id;
+    private Integer id;
     private String name;
     private String email;
     private String password;
