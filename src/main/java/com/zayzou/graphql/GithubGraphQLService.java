@@ -43,8 +43,8 @@ public class GithubGraphQLService {
                    }
                  }
                            """;
-        Mono<User> viewers = graphQlClient.document(document).retrieve("user").toEntity(User.class);
-        return viewers;
+        Mono<User> response = graphQlClient.document(document).retrieve("user").toEntity(User.class);
+        return response;
     }
 
 }
