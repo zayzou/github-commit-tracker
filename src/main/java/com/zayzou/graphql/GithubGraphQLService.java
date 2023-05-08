@@ -22,7 +22,6 @@ public class GithubGraphQLService {
 
     public GithubGraphQLService(GithubProperties githubProperties) {
         this.githubProperties = githubProperties;
-        System.out.println(this.githubProperties.getToken());
         WebClient client = WebClient.builder()
                 .baseUrl("https://api.github.com/graphql")
                 .defaultHeader("Authorization", "Bearer " + this.githubProperties.getToken())
@@ -50,29 +49,34 @@ public class GithubGraphQLService {
         return response;
     }
 
-    public Mono<GitHubApiResponse> getContributionCollections(String username) {
+    public Mono<UserContrib> getContributionCollections(String username) {
+        //language=GraphQL
         String document = """
-                {
-                   user(login: "zayzou") {
-                     contributionsCollection(
-                       from: "2023-05-01T00:00:00Z"
-                       to: "2023-05-08T23:59:00Z"
-                     ) {
-                       contributionCalendar {
-                         total: totalContributions
-                         weeks {
-                           days: contributionDays {
-                             date
-                             contributionCount
-                           }
-                         }
-                       }
-                     }
-                   }
-                 }
-                """;
-        Mono<GitHubApiResponse> response = graphQlClient.document(document).retrieve("user").toEntity(GitHubApiResponse.class);
-        return response;
+                query {
+                    user(login: "zayzou") {
+                      contributionsCollection(
+                        from: "2023-05-01T00:00:00Z"
+                        to: "2023-05-08T23:59:00Z"
+                      ) {
+                        contributionCalendar {
+                          total: totalContributions
+                          weeks {
+                            days: contributionDays {
+                              date
+                              contributionCount
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                 """;
+        //Mono<UserContrib> response =
+        graphQlClient.document(document)
+                .retrieve("user").toEntity(UserContrib.class).subscribe(System.out::println);
+
+
+        return null;
 
     }
 

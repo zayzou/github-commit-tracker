@@ -22,24 +22,48 @@ record ContributionCollection(List<Integer> years) {
 }
 
 
-record GitHubApiResponse(Data data) {
+record UserContrib(
+        ContributionCollection contributionCollection
+) {
+    public static record ContributionCollection(
+            ContributionCalendar contributionCalendar
+    ) {
+        public static record ContributionCalendar(
+                int total,
+                List<Week> weeks
+        ) {
+            public static record Week(
+                    List<Day> days
+            ) {
+                public static record Day(
+                        String date,
+                        int contributionCount
+                ) {
+                }
+            }
+        }
+    }
 }
 
-record Data(UserContrib user) {
-}
 
-record UserContrib(ContributionsCollection contributionsCollection) {
-}
-
-record ContributionsCollection(ContributionCalendar contributionCalendar) {
-}
-
-record ContributionCalendar(int total, List<Week> weeks) {
-}
-
-record Week(List<Day> days) {
-}
-
-record Day(String date, int contributionCount) {
-}
+//record GitHubApiResponse(Data data) {
+//}
+//
+//record Data(UserContrib user) {
+//}
+//
+//record UserContrib(ContributionsCollection contributionsCollection) {
+//}
+//
+//record ContributionsCollection(ContributionCalendar contributionCalendar) {
+//}
+//
+//record ContributionCalendar(int total, List<Week> weeks) {
+//}
+//
+//record Week(List<Day> days) {
+//}
+//
+//record Day(String date, int contributionCount) {
+//}
 
