@@ -21,7 +21,7 @@ public class GithubGraphQLService {
     public GithubGraphQLService() {
         WebClient client = WebClient.builder()
                 .baseUrl("https://api.github.com/graphql")
-                .defaultHeader("Authorization", "Bearer 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")
+                .defaultHeader("Authorization", "Bearer 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")
                 .defaultHeader("content-type", "application/json")
                 .build();
 
@@ -47,28 +47,30 @@ public class GithubGraphQLService {
         return response;
     }
 
-    public Mono<String> getContributionCollections(String username) {
+    public Mono<GitHubApiResponse> getContributionCollections(String username) {
         String document = """
                 {
-                  user(login: "%s") {
-                    contributionsCollection(
-                      from: "2023-01-01T00:00:00Z"
-                      to: "2023-05-08T23:59:00Z"
-                    ) {
-                      contributionCalendar {
-                        total: totalContributions
-                        weeks {
-                          days: contributionDays {
-                            date
-                            contributionCount
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-                """.formatted(username);
-        return null;
+                   user(login: "zayzou") {
+                     contributionsCollection(
+                       from: "2023-05-01T00:00:00Z"
+                       to: "2023-05-08T23:59:00Z"
+                     ) {
+                       contributionCalendar {
+                         total: totalContributions
+                         weeks {
+                           days: contributionDays {
+                             date
+                             contributionCount
+                           }
+                         }
+                       }
+                     }
+                   }
+                 }
+                """;
+        Mono<GitHubApiResponse> response = graphQlClient.document(document).retrieve("user").toEntity(GitHubApiResponse.class);
+        return response;
+
     }
 
 }
