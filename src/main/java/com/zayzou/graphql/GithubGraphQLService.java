@@ -47,4 +47,28 @@ public class GithubGraphQLService {
         return response;
     }
 
+    public Mono<String> getContributions(String username) {
+        String document = """
+                {
+                  user(login: "%s") {
+                    contributionsCollection(
+                      from: "2023-01-01T00:00:00Z"
+                      to: "2023-05-08T23:59:00Z"
+                    ) {
+                      contributionCalendar {
+                        total: totalContributions
+                        weeks {
+                          days: contributionDays {
+                            date
+                            contributionCount
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                """.formatted(username);
+        return null;
+    }
+
 }
