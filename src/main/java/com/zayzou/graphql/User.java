@@ -7,5 +7,19 @@
 
 package com.zayzou.graphql;
 
-public record User(String login, String createAt) {
+import java.util.List;
+
+public record User(
+        String name,
+        String login,
+        String avatarUrl,
+        ContributionCollection contributionsCollection
+
+) {
 }
+
+record ContributionCollection(List<Integer> years) {
+}
+
+
+
