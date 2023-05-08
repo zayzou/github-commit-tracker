@@ -25,7 +25,13 @@ public class GithubGraphQL {
 
     @GetMapping("/ping")
     public void ping() {
-        Mono<GitHubApiResponse> user = this.githubGraphQLService.getContributionCollections("zayzou");
+        Mono<User> user = this.githubGraphQLService.getUser();
+        user.subscribe(response -> System.out.println(response));
+    }
+
+    @GetMapping("/all")
+    public void all() {
+        Mono<UserContrib> user = this.githubGraphQLService.getContributionCollections("zayzou");
         user.subscribe(response -> System.out.println(response));
     }
 
