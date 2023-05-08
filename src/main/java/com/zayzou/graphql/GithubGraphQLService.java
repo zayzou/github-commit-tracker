@@ -10,6 +10,6 @@ package com.zayzou.graphql;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GithubService {
+public class GithubGraphQLService {
 
 }
