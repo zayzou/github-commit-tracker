@@ -47,7 +47,7 @@ public class GithubGraphQLService {
         return response;
     }
 
-    public Mono<String> getContributions(String username) {
+    public Mono<String> getContributionCollections(String username) {
         String document = """
                 {
                   user(login: "%s") {
