@@ -7,6 +7,7 @@
 
 package com.zayzou.graphql;
 
+import com.zayzou.configuration.GithubProperties;
 import org.springframework.graphql.client.HttpGraphQlClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -17,14 +18,16 @@ public class GithubGraphQLService {
 
 
     private final HttpGraphQlClient graphQlClient;
+    private GithubProperties githubProperties;
 
-    public GithubGraphQLService() {
+    public GithubGraphQLService(GithubProperties githubProperties) {
+        this.githubProperties = githubProperties;
+        System.out.println(this.githubProperties.getToken());
         WebClient client = WebClient.builder()
                 .baseUrl("https://api.github.com/graphql")
-                .defaultHeader("Authorization", "Bearer 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")
+                .defaultHeader("Authorization", "Bearer " + this.githubProperties.getToken())
                 .defaultHeader("content-type", "application/json")
                 .build();
-
         graphQlClient = HttpGraphQlClient.builder(client).build();
     }
 
