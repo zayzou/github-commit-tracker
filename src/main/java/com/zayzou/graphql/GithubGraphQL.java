@@ -17,7 +17,6 @@ import reactor.core.publisher.Mono;
 public class GithubGraphQL {
 
 
-    private final String GITHUB_TOKEN = "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";
     private GithubGraphQLService githubGraphQLService;
 
     public GithubGraphQL(GithubGraphQLService githubGraphQLService) {
