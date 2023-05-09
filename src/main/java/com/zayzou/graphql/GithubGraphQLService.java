@@ -67,14 +67,8 @@ public class GithubGraphQLService {
                         }
                       }
                  """;
-        //Mono<UserContrib> response =
-        graphQlClient.document(document).retrieve("user").toEntity(UserContribution.class).subscribe(response -> {
-            int total = response.getContributionsCollection().getContributionCalendar().getTotal();
-            System.out.println("the total number of contribution is" + total);
-        });
 
-
-        return null;
+        return graphQlClient.document(document).retrieve("user").toEntity(UserContribution.class);
 
     }
 
