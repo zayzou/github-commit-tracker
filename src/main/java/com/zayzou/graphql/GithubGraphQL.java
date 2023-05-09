@@ -32,10 +32,17 @@ public class GithubGraphQL {
 
     @GetMapping("/contributions/{username}")
     public void all(@PathVariable String username) {
-        Mono<UserContribution> user = this.githubGraphQLService.getContributionCollections(username);
-        user.subscribe(
-                response -> System.out.println("Total contribution : " + response.getContributionsCollection().getContributionCalendar().getTotal()
-                ));
+        Mono<UserContribution> contributionCollections = this.githubGraphQLService.getContributionCollections(username);
+        contributionCollections.subscribe(
+                response -> {
+                    System.out.println("Total contribution : " + response.getContributionsCollection().getContributionCalendar().getTotal());
+                    response.getContributionsCollection()
+                            .getContributionCalendar()
+                            .getWeeks()
+                            .forEach(
+                                    week -> week.getDays().forEach(day -> System.out.println(day.getDate() + " : " + day.getContributionCount())
+                                    ));
+                });
     }
 
 }
