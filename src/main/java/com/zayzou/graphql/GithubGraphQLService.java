@@ -42,15 +42,12 @@ public class GithubGraphQLService {
         //language=GraphQL
         String document = """
                 query {
-                   user(login: "zayzou") {
-                     name
-                     login
-                     avatarUrl
-                     contributionsCollection {
-                           years: contributionYears
-                         }
-                   }
-                 }
+                    user(login: "zayzou") {
+                      name
+                      login
+                      avatarUrl
+                    }
+                  }
                            """;
         Mono<User> response = graphQlClient.document(document).retrieve("user").toEntity(User.class);
         return response;
