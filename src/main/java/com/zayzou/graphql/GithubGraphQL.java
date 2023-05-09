@@ -32,7 +32,9 @@ public class GithubGraphQL {
     @GetMapping("/all")
     public void all() {
         Mono<UserContribution> user = this.githubGraphQLService.getContributionCollections("zayzou");
-        user.subscribe(response -> System.out.println(response));
+        user.subscribe(
+                response -> System.out.println("Total contribution : " + response.getContributionsCollection().getContributionCalendar().getTotal()
+                ));
     }
 
 }
