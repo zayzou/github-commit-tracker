@@ -51,8 +51,8 @@ public class GithubGraphQLService {
                 query {
                         user(login: "zayzou") {
                           contributionsCollection(
-                            from: "2023-05-08T00:00:00Z"
-                            to: "2023-05-08T23:59:00Z"
+                            from: "2023-05-01T00:00:00Z"
+                            to: "2023-05-31T23:59:00Z"
                           ) {
                             contributionCalendar {
                               total: totalContributions
