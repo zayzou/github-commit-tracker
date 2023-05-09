@@ -15,11 +15,9 @@ import java.time.format.DateTimeFormatter;
 public class GithubService {
 
     private final String GITHUB_CONTRIBUTIONS_URL_FORMAT = "https://github.com/users/%s/contributions?to=%s"; // URL format for fetching Github contributions data
-
+    private final OkHttpUtils okHttpUtils; // OkHttpUtils instance for making HTTP calls
     @Value(("${github.username}"))
     private String githubUsername; // Github username injected from properties file
-    
-    private final OkHttpUtils okHttpUtils; // OkHttpUtils instance for making HTTP calls
 
     public GithubService(OkHttpUtils okHttpUtils) {
         this.okHttpUtils = okHttpUtils;

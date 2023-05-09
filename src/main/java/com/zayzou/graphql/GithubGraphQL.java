@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 public class GithubGraphQL {
 
 
-    private GithubGraphQLService githubGraphQLService;
+    private final GithubGraphQLService githubGraphQLService;
 
     public GithubGraphQL(GithubGraphQLService githubGraphQLService) {
         this.githubGraphQLService = githubGraphQLService;

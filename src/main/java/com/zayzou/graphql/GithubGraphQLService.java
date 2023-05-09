@@ -18,7 +18,7 @@ public class GithubGraphQLService {
 
 
     private final HttpGraphQlClient graphQlClient;
-    private GithubProperties githubProperties;
+    private final GithubProperties githubProperties;
 
     public GithubGraphQLService(GithubProperties githubProperties) {
         this.githubProperties = githubProperties;

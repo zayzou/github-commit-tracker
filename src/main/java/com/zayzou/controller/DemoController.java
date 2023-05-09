@@ -7,6 +7,7 @@
  */
 
 package com.zayzou.controller;
+
 import com.zayzou.configuration.GithubProperties;
 import com.zayzou.service.TelegramService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,6 @@ public class DemoController {
         telegramService.sendToTelegram("today");
         return "telegram message sent";
     }
-
 
 
 }

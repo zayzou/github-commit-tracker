@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "api/v1", produces = "application/json")
 @CrossOrigin(origins = "http://localhost:8080")
 public class RootController {
-    private TelegramService telegramService;
-    private GithubService githubService;
+    private final TelegramService telegramService;
+    private final GithubService githubService;
 
     public RootController(TelegramService telegramService, GithubService githubService) {
         this.telegramService = telegramService;

@@ -23,6 +23,7 @@ public class AppConfig {
 
     @Autowired
     TelegramBot telegramBot;
+
     @Bean
     public void registerBot() {
         try {
