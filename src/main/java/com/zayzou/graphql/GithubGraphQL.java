@@ -8,6 +8,7 @@
 package com.zayzou.graphql;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -23,15 +24,15 @@ public class GithubGraphQL {
         this.githubGraphQLService = githubGraphQLService;
     }
 
-    @GetMapping("/ping")
-    public void ping() {
-        Mono<User> user = this.githubGraphQLService.getUser("zayzou");
+    @GetMapping("/user/{username}")
+    public void ping(@PathVariable String username) {
+        Mono<User> user = this.githubGraphQLService.getUser(username);
         user.subscribe(response -> System.out.println(response));
     }
 
-    @GetMapping("/all")
-    public void all() {
-        Mono<UserContribution> user = this.githubGraphQLService.getContributionCollections("zayzou");
+    @GetMapping("/contributions/{username}")
+    public void all(@PathVariable String username) {
+        Mono<UserContribution> user = this.githubGraphQLService.getContributionCollections(username);
         user.subscribe(
                 response -> System.out.println("Total contribution : " + response.getContributionsCollection().getContributionCalendar().getTotal()
                 ));
