@@ -22,7 +22,18 @@ public class GithubGraphQLService {
 
     public GithubGraphQLService(GithubProperties githubProperties) {
         this.githubProperties = githubProperties;
-        WebClient client = WebClient.builder().baseUrl("https://api.github.com/graphql").defaultHeader("Authorization", "Bearer " + this.githubProperties.getToken()).defaultHeader("content-type", "application/json").build();
+
+        // Create a WebClient that will be used to send GraphQL requests to Github's API.
+        // Set the base URL to the GraphQL endpoint.
+        // Add default headers that include the Github access token and content type.
+        WebClient client = WebClient.builder()
+                .baseUrl("https://api.github.com/graphql")
+                .defaultHeader("Authorization", "Bearer " + this.githubProperties.getToken())
+                .defaultHeader("content-type", "application/json")
+                .build();
+
+        // Create a HttpGraphQlClient that will be used to send GraphQL requests
+        // to the Github API using the WebClient created earlier.
         graphQlClient = HttpGraphQlClient.builder(client).build();
     }
 
