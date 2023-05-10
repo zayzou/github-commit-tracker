@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("graphql")
 public class GithubGraphQL {
@@ -34,6 +37,8 @@ public class GithubGraphQL {
     public void all(@PathVariable String username) {
         Mono<UserContribution> contributionCollections =
                 this.githubGraphQLService.getContributionCollections(username, "2023-05-01T00:00:00Z", "2023-05-31T23:59:00Z");
+
+        List<Week> weeks = new ArrayList<>();
         contributionCollections.subscribe(
                 response -> {
                     System.out.println("Total contribution : " + response.getContributionsCollection().getContributionCalendar().getTotal());
