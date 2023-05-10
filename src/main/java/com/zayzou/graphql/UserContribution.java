@@ -12,11 +12,11 @@ import java.util.List;
 public class UserContribution {
     private ContributionsCollection contributionsCollection;
 
-    ContributionsCollection getContributionsCollection() {
+    public ContributionsCollection getContributionsCollection() {
         return contributionsCollection;
     }
 
-    void setContributionsCollection(ContributionsCollection contributionsCollection) {
+    public void setContributionsCollection(ContributionsCollection contributionsCollection) {
         this.contributionsCollection = contributionsCollection;
     }
 }
@@ -24,11 +24,11 @@ public class UserContribution {
 class ContributionsCollection {
     private ContributionCalendar contributionCalendar;
 
-    ContributionCalendar getContributionCalendar() {
+    public ContributionCalendar getContributionCalendar() {
         return contributionCalendar;
     }
 
-    void setContributionCalendar(ContributionCalendar contributionCalendar) {
+    public void setContributionCalendar(ContributionCalendar contributionCalendar) {
         this.contributionCalendar = contributionCalendar;
     }
 }
@@ -37,31 +37,32 @@ class ContributionCalendar {
     private int total;
     private List<Week> weeks;
 
-    int getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    void setTotal(int total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 
-    List<Week> getWeeks() {
+    public List<Week> getWeeks() {
         return weeks;
     }
 
-    void setWeeks(List<Week> weeks) {
+    public void setWeeks(List<Week> weeks) {
         this.weeks = weeks;
     }
 }
 
 class Week {
+
     private List<Day> days;
 
-    List<Day> getDays() {
+    public List<Day> getDays() {
         return days;
     }
 
-    void setDays(List<Day> days) {
+    public void setDays(List<Day> days) {
         this.days = days;
     }
 }
@@ -70,19 +71,19 @@ class Day {
     private String date;
     private int contributionCount;
 
-    String getDate() {
+    public String getDate() {
         return date;
     }
 
-    void setDate(String date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    int getContributionCount() {
+    public int getContributionCount() {
         return contributionCount;
     }
 
-    void setContributionCount(int contributionCount) {
+    public void setContributionCount(int contributionCount) {
         this.contributionCount = contributionCount;
     }
 }
