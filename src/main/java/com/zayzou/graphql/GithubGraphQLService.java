@@ -53,14 +53,14 @@ public class GithubGraphQLService {
         return response;
     }
 
-    public Mono<UserContribution> getContributionCollections(String username) {
+    public Mono<UserContribution> getContributionCollections(String username, String from, String to) {
         //language=GraphQL
         String document = """
                 query {
                         user(login: "%s") {
                           contributionsCollection(
-                            from: "2023-05-01T00:00:00Z"
-                            to: "2023-05-31T23:59:00Z"
+                            from: "%s"
+                            to: "%s"
                           ) {
                             contributionCalendar {
                               total: totalContributions
@@ -74,7 +74,7 @@ public class GithubGraphQLService {
                           }
                         }
                       }
-                 """.formatted(username);
+                 """.formatted(username, from, to);
         return graphQlClient.document(document).retrieve("user").toEntity(UserContribution.class);
     }
 }
