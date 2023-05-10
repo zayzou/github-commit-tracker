@@ -7,10 +7,8 @@
 
 package com.zayzou.graphql;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -28,6 +26,7 @@ public class GithubGraphQL {
     }
 
     @GetMapping("/user/{username}")
+    @ResponseStatus(HttpStatus.OK)
     public User ping(@PathVariable String username) {
         Mono<User> user = this.githubGraphQLService.getUser(username);
         return user.block();
@@ -35,6 +34,7 @@ public class GithubGraphQL {
 
 
     @GetMapping("/contributions/{username}")
+    @ResponseStatus(HttpStatus.OK)
     public List<Week> all(@PathVariable String username) {
 
         Mono<UserContribution> contributionCollections =
