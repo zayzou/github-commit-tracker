@@ -22,6 +22,7 @@ public class GithubGraphQL {
 
 
     private final GithubGraphQLService githubGraphQLService;
+    private List<Week> weeks = new ArrayList<>();
 
     public GithubGraphQL(GithubGraphQLService githubGraphQLService) {
         this.githubGraphQLService = githubGraphQLService;
@@ -33,20 +34,23 @@ public class GithubGraphQL {
         user.subscribe(response -> System.out.println(response));
     }
 
+    //        System.out.println("Total contribution : " + response.getContributionsCollection().getContributionCalendar().getTotal());
+    //week -> week.getDays().forEach(day -> System.out.println(day.getDate() + " : " + day.getContributionCount())
     @GetMapping("/contributions/{username}")
     public void all(@PathVariable String username) {
         Mono<UserContribution> contributionCollections =
                 this.githubGraphQLService.getContributionCollections(username, "2023-05-01T00:00:00Z", "2023-05-31T23:59:00Z");
 
-        List<Week> weeks = new ArrayList<>();
-//        System.out.println("Total contribution : " + response.getContributionsCollection().getContributionCalendar().getTotal());
-        //week -> week.getDays().forEach(day -> System.out.println(day.getDate() + " : " + day.getContributionCount())
         contributionCollections.subscribe(
                 response -> {
-                    weeks.addAll(response.getContributionsCollection()
-                            .getContributionCalendar()
-                            .getWeeks());
+                    this.weeks.addAll(
+                            response.getContributionsCollection()
+                                    .getContributionCalendar()
+                                    .getWeeks());
+
                 });
+        System.out.println(this.weeks.size());
     }
+
 
 }
