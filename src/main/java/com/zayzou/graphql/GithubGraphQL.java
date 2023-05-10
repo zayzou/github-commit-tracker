@@ -28,9 +28,9 @@ public class GithubGraphQL {
     }
 
     @GetMapping("/user/{username}")
-    public void ping(@PathVariable String username) {
+    public User ping(@PathVariable String username) {
         Mono<User> user = this.githubGraphQLService.getUser(username);
-        user.subscribe(response -> System.out.println(response));
+        return user.block();
     }
 
 
