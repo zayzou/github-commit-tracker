@@ -39,15 +39,13 @@ public class GithubGraphQL {
                 this.githubGraphQLService.getContributionCollections(username, "2023-05-01T00:00:00Z", "2023-05-31T23:59:00Z");
 
         List<Week> weeks = new ArrayList<>();
+//        System.out.println("Total contribution : " + response.getContributionsCollection().getContributionCalendar().getTotal());
+        //week -> week.getDays().forEach(day -> System.out.println(day.getDate() + " : " + day.getContributionCount())
         contributionCollections.subscribe(
                 response -> {
-                    System.out.println("Total contribution : " + response.getContributionsCollection().getContributionCalendar().getTotal());
-                    response.getContributionsCollection()
+                    weeks.addAll(response.getContributionsCollection()
                             .getContributionCalendar()
-                            .getWeeks()
-                            .forEach(
-                                    week -> week.getDays().forEach(day -> System.out.println(day.getDate() + " : " + day.getContributionCount())
-                                    ));
+                            .getWeeks());
                 });
     }
 
