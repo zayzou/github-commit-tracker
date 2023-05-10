@@ -8,7 +8,7 @@
 GitHub Commit Tracker is a Java Spring Boot application that tracks the number of commits made by a user on GitHub and sends the count via email and Telegram bot. It uses the GitHub API to fetch the number of commits made and the JavaMail API and Telegram bot API to send an email and message respectively.
 
 ## Technical Details
-
+NOW I AM WORKING ON A GRAPHQL IMPLEMENTATION.
 The application is built using Java Spring Boot and uses the following dependencies:
 
 - Spring Boot Starter Web
