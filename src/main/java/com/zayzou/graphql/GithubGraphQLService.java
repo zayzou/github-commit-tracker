@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import static com.zayzou.utils.DateFormatter.getCurrentDate;
+
 @Service
 public class GithubGraphQLService {
 
@@ -80,6 +82,12 @@ public class GithubGraphQLService {
 
 
     public String getTodayContribution() {
-        return null;
+        String today = getCurrentDate();
+        return this.getContributionCollections("zayzou", today, today)
+                .block()
+                .getContributionsCollection()
+                .getContributionCalendar()
+                .getWeeks().toString();
+
     }
 }
