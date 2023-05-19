@@ -36,7 +36,6 @@ public class GithubGraphQL {
     @GetMapping("/contributions/{username}")
     @ResponseStatus(HttpStatus.OK)
     public List<Week> all(@PathVariable String username) {
-
         Mono<UserContribution> contributionCollections =
                 this.githubGraphQLService.getContributionCollections
                         (username, "2023-05-01T00:00:00Z", "2023-05-31T23:59:00Z");
@@ -53,6 +52,11 @@ public class GithubGraphQL {
     @GetMapping("contributions/today")
     public int today() {
         return this.githubGraphQLService.getTodayContribution();
+    }
+
+    @GetMapping("contributions/year")
+    public int year() {
+        return this.githubGraphQLService.getYearlyContributions();
     }
 
 
