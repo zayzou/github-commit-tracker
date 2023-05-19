@@ -50,5 +50,10 @@ public class GithubGraphQL {
 
     }
 
+    @GetMapping("contributions/today")
+    public int today() {
+        return this.githubGraphQLService.getTodayContribution();
+    }
+
 
 }
