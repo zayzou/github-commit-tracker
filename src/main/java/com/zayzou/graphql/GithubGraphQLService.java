@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.zayzou.utils.DateFormatter.getCurrentDate;
+import static com.zayzou.utils.DateFormatter.getFormattedDate;
 
 @Service
 public class GithubGraphQLService {
@@ -86,7 +86,7 @@ public class GithubGraphQLService {
 
 
     public int getTodayContribution() {
-        String today = getCurrentDate(LocalDate.now());
+        String today = getFormattedDate(LocalDate.now());
         List<Week> weeks = this.getContributionCollections(githubProperties.getUsername(), today, today)
                 .block()
                 .getContributionsCollection()
@@ -97,8 +97,8 @@ public class GithubGraphQLService {
     }
 
     public int getYearlyContributions() {
-        String firstDayOfYear = getCurrentDate(LocalDate.now().withDayOfYear(1));
-        String today = getCurrentDate(LocalDate.now());
+        String firstDayOfYear = getFormattedDate(LocalDate.now().withDayOfYear(1));
+        String today = getFormattedDate(LocalDate.now());
         return getContributionCollections(githubProperties.getUsername(), firstDayOfYear, today)
                 .block()
                 .getContributionsCollection()

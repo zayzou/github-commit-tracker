@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 public class DateFormatter {
 
-    public static String getCurrentDate(LocalDate date) {
+    public static String getFormattedDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         return date.format(formatter); // Get current date in ISO_DATE format
 

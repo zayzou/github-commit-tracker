@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-import static com.zayzou.utils.DateFormatter.getCurrentDate;
+import static com.zayzou.utils.DateFormatter.getFormattedDate;
 
 @Service
 @Slf4j
@@ -35,14 +35,14 @@ public class GithubService {
     }
 
     public String getTodayContribution() {
-        String currentDate = getCurrentDate(LocalDate.now()).substring(0, 10);//remove time part of the date
+        String currentDate = getFormattedDate(LocalDate.now()).substring(0, 10);//remove time part of the date
         String url = String.format(GITHUB_CONTRIBUTIONS_URL_FORMAT, githubUsername, currentDate); // Format the Github contributions URL with current date and username
         String responseValue = okHttpUtils.httpCall(url, "GET"); // Make HTTP GET call to Github contributions URL
         return getContribution(responseValue, "data-date", currentDate); // Extract today's contribution from the response
     }
 
     public String getCurrentYearContribution() {
-        String currentDate = getCurrentDate(LocalDate.now());
+        String currentDate = getFormattedDate(LocalDate.now());
         String url = String.format(GITHUB_CONTRIBUTIONS_URL_FORMAT, githubUsername, currentDate); // Format the Github contributions URL with current date and username
         String responseValue = okHttpUtils.httpCall(url, "GET"); // Make HTTP GET call to Github contributions URL
         return getContribution(responseValue, "class", "f4 text-normal mb-2"); // Extract current year's contribution from the response
