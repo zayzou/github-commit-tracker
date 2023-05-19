@@ -77,4 +77,9 @@ public class GithubGraphQLService {
                  """.formatted(username, from, to);
         return graphQlClient.document(document).retrieve("user").toEntity(UserContribution.class);
     }
+
+
+    public String getTodayContribution() {
+        return null;
+    }
 }
