@@ -33,7 +33,7 @@ public class GithubService {
     }
 
     public String getTodayContribution() {
-        String currentDate = getCurrentDate();
+        String currentDate = getCurrentDate().substring(0, 10);//remove time part of the date
         String url = String.format(GITHUB_CONTRIBUTIONS_URL_FORMAT, githubUsername, currentDate); // Format the Github contributions URL with current date and username
         String responseValue = okHttpUtils.httpCall(url, "GET"); // Make HTTP GET call to Github contributions URL
         return getContribution(responseValue, "data-date", currentDate); // Extract today's contribution from the response
