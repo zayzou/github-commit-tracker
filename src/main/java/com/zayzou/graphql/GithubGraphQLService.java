@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -84,24 +85,31 @@ public class GithubGraphQLService {
     }
 
 
-    public int getTodayContribution() {
+    public String getTodayContribution() {
         String today = getFormattedDate(LocalDateTime.now());
         List<Week> weeks = this.getContributionCollections(githubProperties.getUsername(), today, today)
                 .block()
                 .getContributionsCollection()
                 .getContributionCalendar()
                 .getWeeks();
-        return weeks.get(0).getDays().get(0).getContributionCount();
+
+        int contributionCount = weeks.get(0).getDays().get(0).getContributionCount();
+        String date = weeks.get(0).getDays().get(0).getDate();
+        String template = "%s contributions on %s, ".formatted(contributionCount, date);
+        return template;
 
     }
 
-    public int getYearlyContributions() {
+    public String getYearlyContributions() {
         String firstDayOfYear = getFormattedDate(LocalDateTime.now().withDayOfYear(1));
         String today = getFormattedDate(LocalDateTime.now());
-        return getContributionCollections(githubProperties.getUsername(), firstDayOfYear, today)
+        int total = getContributionCollections(githubProperties.getUsername(), firstDayOfYear, today)
                 .block()
                 .getContributionsCollection()
                 .getContributionCalendar()
                 .getTotal();
+        String template = "%s contributions in %s".formatted(total, LocalDate.now().getYear());
+        return template;
+
     }
 }
