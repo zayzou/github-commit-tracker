@@ -7,8 +7,7 @@ import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import static com.zayzou.utils.DateFormatter.getCurrentDate;
 
 @Service
 @Slf4j
@@ -27,10 +26,6 @@ public class GithubService {
         return Jsoup.parse(html); // Parse HTML string to Jsoup Document
     }
 
-    private String getCurrentDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
-        return LocalDate.now().format(formatter); // Get current date in ISO_DATE format
-    }
 
     private String getContribution(String html, String attribute, String value) {
         Document doc = parseHtml(html);
