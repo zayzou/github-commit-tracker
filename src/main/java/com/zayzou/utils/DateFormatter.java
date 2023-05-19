@@ -7,13 +7,14 @@
 
 package com.zayzou.utils;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class DateFormatter {
 
-    public static String getCurrentDate() {
+    public static String getCurrentDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
-        return LocalDateTime.now().format(formatter); // Get current date in ISO_DATE format
+        return date.format(formatter); // Get current date in ISO_DATE format
+
     }
 }
