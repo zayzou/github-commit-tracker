@@ -50,12 +50,12 @@ public class GithubGraphQL {
     }
 
     @GetMapping("contributions/today")
-    public int today() {
+    public String today() {
         return this.githubGraphQLService.getTodayContribution();
     }
 
     @GetMapping("contributions/year")
-    public int year() {
+    public String year() {
         return this.githubGraphQLService.getYearlyContributions();
     }
 
