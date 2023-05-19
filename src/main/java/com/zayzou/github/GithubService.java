@@ -1,4 +1,11 @@
-package com.zayzou.service;
+/*
+ * Copyright (C) 2023
+ *
+ * Author : z.soffi
+ * File : GithubService.java
+ */
+
+package com.zayzou.github;
 
 import com.zayzou.utils.OkHttpUtils;
 import lombok.extern.slf4j.Slf4j;

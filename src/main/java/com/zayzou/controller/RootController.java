@@ -8,8 +8,8 @@
 package com.zayzou.controller;
 
 
-import com.zayzou.service.GithubService;
-import com.zayzou.service.TelegramService;
+import com.zayzou.github.GithubService;
+import com.zayzou.telegram.TelegramService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

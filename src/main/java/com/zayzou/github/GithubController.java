@@ -5,10 +5,9 @@
  * File : GithubController.java
  */
 
-package com.zayzou.controller;
+package com.zayzou.github;
 
-import com.zayzou.service.GithubService;
-import com.zayzou.service.TelegramService;
+import com.zayzou.telegram.TelegramService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

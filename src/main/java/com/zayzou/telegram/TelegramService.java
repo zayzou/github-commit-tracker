@@ -5,7 +5,7 @@
  * File : TelegramService.java
  */
 
-package com.zayzou.service;
+package com.zayzou.telegram;
 
 import com.zayzou.graphql.GithubGraphQLService;
 import com.zayzou.utils.OkHttpUtils;

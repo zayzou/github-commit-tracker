@@ -7,7 +7,7 @@
 
 package com.zayzou.graphql;
 
-import com.zayzou.configuration.GithubProperties;
+import com.zayzou.github.GithubProperties;
 import org.springframework.graphql.client.HttpGraphQlClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

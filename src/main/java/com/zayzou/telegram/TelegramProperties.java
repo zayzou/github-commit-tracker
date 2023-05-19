@@ -5,7 +5,7 @@
  * File : TelegramProperties.java
  */
 
-package com.zayzou.configuration;
+package com.zayzou.telegram;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
