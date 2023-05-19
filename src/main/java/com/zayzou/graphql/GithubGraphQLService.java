@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.zayzou.utils.DateFormatter.getFormattedDate;
@@ -86,7 +86,7 @@ public class GithubGraphQLService {
 
 
     public int getTodayContribution() {
-        String today = getFormattedDate(LocalDate.now());
+        String today = getFormattedDate(LocalDateTime.now());
         List<Week> weeks = this.getContributionCollections(githubProperties.getUsername(), today, today)
                 .block()
                 .getContributionsCollection()
@@ -97,8 +97,8 @@ public class GithubGraphQLService {
     }
 
     public int getYearlyContributions() {
-        String firstDayOfYear = getFormattedDate(LocalDate.now().withDayOfYear(1));
-        String today = getFormattedDate(LocalDate.now());
+        String firstDayOfYear = getFormattedDate(LocalDateTime.now().withDayOfYear(1));
+        String today = getFormattedDate(LocalDateTime.now());
         return getContributionCollections(githubProperties.getUsername(), firstDayOfYear, today)
                 .block()
                 .getContributionsCollection()
