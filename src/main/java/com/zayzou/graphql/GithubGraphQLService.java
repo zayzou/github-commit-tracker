@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.zayzou.utils.DateFormatter.getCurrentDate;
@@ -79,18 +80,29 @@ public class GithubGraphQLService {
                         }
                       }
                  """.formatted(username, from, to);
+        System.out.println(document);
         return graphQlClient.document(document).retrieve("user").toEntity(UserContribution.class);
     }
 
 
     public int getTodayContribution() {
-        String today = getCurrentDate();
-        List<Week> weeks = this.getContributionCollections("zayzou", today, today)
+        String today = getCurrentDate(LocalDate.now());
+        List<Week> weeks = this.getContributionCollections(githubProperties.getUsername(), today, today)
                 .block()
                 .getContributionsCollection()
                 .getContributionCalendar()
                 .getWeeks();
         return weeks.get(0).getDays().get(0).getContributionCount();
 
+    }
+
+    public int getYearlyContributions() {
+        String firstDayOfYear = getCurrentDate(LocalDate.now().withDayOfYear(1));
+        String today = getCurrentDate(LocalDate.now());
+        return getContributionCollections(githubProperties.getUsername(), firstDayOfYear, today)
+                .block()
+                .getContributionsCollection()
+                .getContributionCalendar()
+                .getTotal();
     }
 }
