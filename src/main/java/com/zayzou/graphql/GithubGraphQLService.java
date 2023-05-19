@@ -80,7 +80,6 @@ public class GithubGraphQLService {
                         }
                       }
                  """.formatted(username, from, to);
-        System.out.println(document);
         return graphQlClient.document(document).retrieve("user").toEntity(UserContribution.class);
     }
 
