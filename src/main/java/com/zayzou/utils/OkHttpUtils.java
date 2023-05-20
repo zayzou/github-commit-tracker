@@ -8,7 +8,10 @@
 package com.zayzou.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.*;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -30,11 +33,7 @@ public class OkHttpUtils {
                     .url(url)
                     .method(method, body)
                     .build();
-            Response response = client.newCall(request).execute();
-            if (response.code() == 200) {
-                String string = response.body().string();
-                response.close();
-            }
+            client.newCall(request).execute();
 
         } catch (IOException e) {
             log.error(e.getMessage());
