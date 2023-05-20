@@ -38,7 +38,7 @@ public class RootController {
     }
 
     @GetMapping("/telegram/{command}")
-    public String sendToTelegram(@PathVariable String command) {
+    public String send(@PathVariable String command) {
         String updates = "done";
         if (command.equals("year")) {
             telegramService.sendToTelegram("year");
