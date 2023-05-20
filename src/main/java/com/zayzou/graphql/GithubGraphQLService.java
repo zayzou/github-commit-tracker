@@ -7,7 +7,6 @@
 
 package com.zayzou.graphql;
 
-import com.zayzou.github.GithubProperties;
 import org.springframework.graphql.client.HttpGraphQlClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -100,7 +99,7 @@ public class GithubGraphQLService {
 
     }
 
-    public String getYearlyContributions() {
+    public String getCurrentYearContributions() {
         String firstDayOfYear = getFormattedDate(LocalDateTime.now().withDayOfYear(1));
         String today = getFormattedDate(LocalDateTime.now());
         int total = getContributionCollections(githubProperties.getUsername(), firstDayOfYear, today)
