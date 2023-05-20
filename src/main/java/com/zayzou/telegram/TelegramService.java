@@ -33,14 +33,13 @@ public class TelegramService {
     }
 
     public void sendToTelegram(String command) {
-        String message = getResult(command);
+        String message = setMessagesToSend(command);
         String url = "https://api.telegram.org/bot" + botId + "/sendMessage?chat_id=" + userId + "&text=" + message;
-        log.info("sending %s to %s", command, url);
         this.okHttpUtils.httpCall(url, "POST");
     }
 
 
-    public String getResult(String command) {
+    public String setMessagesToSend(String command) {
         String message = Objects.equals(command, "today") ? githubService.getTodayContribution() : githubService.getCurrentYearContributions(); // Fetch Github contributions based on command ("today" or "year")
         String reaction = message.startsWith("No") ? "😭" : "🥳"; // Set reaction emoji based on Github contributions message
         message = String.format("%s %s", reaction, message); // Format the final message with reaction emoji
