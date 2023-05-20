@@ -13,8 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-
 @Service
 @Slf4j
 public class TelegramService {
@@ -40,7 +38,7 @@ public class TelegramService {
 
 
     public String setMessagesToSend(String command) {
-        String message = Objects.equals(command, "today") ? githubService.getTodayContribution() : githubService.getCurrentYearContributions(); // Fetch Github contributions based on command ("today" or "year")
+        String message = command.equals("today") ? githubService.getTodayContribution() : githubService.getCurrentYearContributions(); // Fetch Github contributions based on command ("today" or "year")
         String reaction = message.startsWith("No") ? "😭" : "🥳"; // Set reaction emoji based on Github contributions message
         message = String.format("%s %s", reaction, message); // Format the final message with reaction emoji
         return message;
