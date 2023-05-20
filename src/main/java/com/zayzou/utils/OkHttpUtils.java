@@ -28,13 +28,12 @@ public class OkHttpUtils {
 
     public void httpCall(String url, String method) {
         try {
-            RequestBody body = (method == "POST") ? RequestBody.create(MediaType.parse("text/plain"), "") : null;
+            RequestBody body = method.equals("POST") ? RequestBody.create("", MediaType.parse("text/plain")) : null;
             Request request = new Request.Builder()
                     .url(url)
                     .method(method, body)
                     .build();
             client.newCall(request).execute();
-
         } catch (IOException e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
