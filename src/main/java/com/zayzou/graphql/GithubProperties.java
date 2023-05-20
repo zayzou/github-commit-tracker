@@ -5,7 +5,7 @@
  * File : GithubProperties.java
  */
 
-package com.zayzou.github;
+package com.zayzou.graphql;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

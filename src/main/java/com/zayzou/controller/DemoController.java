@@ -8,7 +8,7 @@
 
 package com.zayzou.controller;
 
-import com.zayzou.github.GithubProperties;
+import com.zayzou.graphql.GithubProperties;
 import com.zayzou.telegram.TelegramService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
