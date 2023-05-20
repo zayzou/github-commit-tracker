@@ -38,7 +38,7 @@ public class TelegramService {
 
 
     public String getResult(String command) {
-        String message = Objects.equals(command, "today") ? githubService.getTodayContribution() : githubService.getYearlyContributions(); // Fetch Github contributions based on command ("today" or "year")
+        String message = Objects.equals(command, "today") ? githubService.getTodayContribution() : githubService.getCurrentYearContributions(); // Fetch Github contributions based on command ("today" or "year")
         String reaction = message.startsWith("No") ? "😭" : "🥳"; // Set reaction emoji based on Github contributions message
         message = String.format("%s %s", reaction, message); // Format the final message with reaction emoji
         return message;
