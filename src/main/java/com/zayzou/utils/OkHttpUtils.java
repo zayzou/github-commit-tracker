@@ -23,7 +23,7 @@ public class OkHttpUtils {
         this.client = new OkHttpClient().newBuilder().build();
     }
 
-    public String httpCall(String url, String method) {
+    public void httpCall(String url, String method) {
         try {
             RequestBody body = (method == "POST") ? RequestBody.create(MediaType.parse("text/plain"), "") : null;
             Request request = new Request.Builder()
@@ -32,14 +32,14 @@ public class OkHttpUtils {
                     .build();
             Response response = client.newCall(request).execute();
             if (response.code() == 200) {
-                return response.body().string();
-            } else {
-                return "Error code :  " + response.code();
+                String string = response.body().string();
+                response.close();
             }
 
         } catch (IOException e) {
             log.error(e.getMessage());
             throw new RuntimeException(e);
         }
+
     }
 }
