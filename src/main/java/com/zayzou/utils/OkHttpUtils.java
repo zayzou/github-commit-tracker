@@ -31,7 +31,11 @@ public class OkHttpUtils {
                     .method(method, body)
                     .build();
             Response response = client.newCall(request).execute();
-            return response.body().string();
+            if (response.code() == 200) {
+                return response.body().string();
+            } else {
+                return "Error code :  " + response.code();
+            }
 
         } catch (IOException e) {
             log.error(e.getMessage());
