@@ -56,7 +56,7 @@ public class GithubGraphQL {
 
     @GetMapping("contributions/year")
     public String year() {
-        return this.githubGraphQLService.getYearlyContributions();
+        return this.githubGraphQLService.getCurrentYearContributions();
     }
 
 
