@@ -9,12 +9,14 @@ package com.zayzou.telegram;
 
 import com.zayzou.graphql.GithubGraphQLService;
 import com.zayzou.utils.OkHttpUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 @Service
+@Slf4j
 public class TelegramService {
 
     private final OkHttpUtils okHttpUtils; // OkHttpUtils instance for making HTTP calls
@@ -33,6 +35,7 @@ public class TelegramService {
     public void sendToTelegram(String command) {
         String message = getResult(command);
         String url = "https://api.telegram.org/bot" + botId + "/sendMessage?chat_id=" + userId + "&text=" + message;
+        log.info("sending %s to %s", command, url);
         this.okHttpUtils.httpCall(url, "POST");
     }
 
