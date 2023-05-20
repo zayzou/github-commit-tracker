@@ -65,7 +65,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     // Helper method to send commands to TelegramService
     private String send(String command) {
-        return telegramService.getResult(command);
+        return telegramService.setMessagesToSend(command);
     }
 
     @Override
