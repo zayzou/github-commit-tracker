@@ -7,7 +7,7 @@
 
 package com.zayzou.configuration;
 
-import com.zayzou.github.GithubProperties;
+import com.zayzou.graphql.GithubProperties;
 import com.zayzou.telegram.TelegramBot;
 import com.zayzou.telegram.TelegramProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 
 @Configuration
-@EnableConfigurationProperties({GithubProperties.class, TelegramProperties.class, NotionConfigProperties.class})
+@EnableConfigurationProperties({GithubProperties.class, TelegramProperties.class})
 public class AppConfig {
 
     @Autowired
